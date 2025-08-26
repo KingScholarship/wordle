@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+    text-align: center;
+
+    user-select: none;
+
+    text-decoration: none;
+    color: white;
+}
+
+body {
+    background-size: cover;
+    background-position: center;
+    background-color: var(--bg-color);
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./resources/bg-img.png');
+    background-size: cover;
+    background-position: center;
+
+    filter: blur(10px);
+    z-index: -1;
+}
+
+.container {
+
+    background-color: var(--glass);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.59);
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 500px;
+    height: 400px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+h1 {
+    font-size: 50px;
+
+    color: white;
+    letter-spacing: 10px;
+
+    margin-bottom: 30px;
+}
+
+.play {
+    width: 70%;
+    height: 50px;
+
+    color: white;
+    font-weight: bold;
+
+    font-size: 20px;
+
+    background-color: rgb(106, 255, 106);
+
+    border: 0px solid;
+    border-radius: 10px;
+
+    cursor: pointer;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+
+    padding: 10px;
+}
+
+.play:hover {
+    transition: ease 1s .1s;
+    width: 71%;
+    height: 52px;
+    color: var(--exist);
+}
+
+#exist {
+    color: var(--exist);
+}
+
+#correct {
+    color: var(--correct);
+}

@@ -1,0 +1,12 @@
+:root {
+    --bg-color: #3a4c58;
+    --correct: rgb(155, 229, 155);
+    --correct-letter: rgb(248, 248, 248);
+    --exist: rgb(222, 222, 120);
+    --wrong: gray;
+    --wrong-letter: rgb(196, 196, 196);
+    --glass: #ffffff4a;
+    --writing: rgb(164, 166, 172);
+    --white: rgb(243, 243, 243);
+    --lose: red;
+}
