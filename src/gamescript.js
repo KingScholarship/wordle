@@ -23,24 +23,11 @@ const keyboardElement = document.getElementsByClassName('keyboard')[0];
 const keyboardInputs = document.getElementsByClassName('keys');
 
 document.addEventListener('DOMContentLoaded', (event) => {
+    //setup keyboard for game
+    setUpKeyboard();
+
     //whenever the DOM loaded we call restart
     restart();
-
-    //setting eventListeners to each key
-    for (let i = 0; i < keyboardInputs.length; i++) {
-        let key = keyboardInputs[i];        
-
-        if (key.innerHTML.length > 8) {
-            console.log(key.addEventListener('click', (event) => {
-                handleInputs("BACKSPACE");
-            }));
-            continue;
-        }
-
-        key.addEventListener('click', (event) => {
-            handleInputs(key.innerHTML);
-        })
-    }
 })
 
 document.addEventListener('keydown', (event)=> {
@@ -50,6 +37,8 @@ document.addEventListener('keydown', (event)=> {
     if (resultDisplayed === true) {
         if (key == "ENTER") {
             restart();
+        } else if (key == "ESCAPE") {
+            window.location.href = '../index.html';
         }
         return;
     }
@@ -58,6 +47,11 @@ document.addEventListener('keydown', (event)=> {
 })
 
 const handleInputs = (key) => {
+
+    //proceed to menu
+    if (key == "ESCAPE") {
+        window.location.href = '../index.html';
+    }
 
     //check letter row
     if (key === "ENTER") {
@@ -240,4 +234,22 @@ const displayResult = (result) => {
 
     //prevent input handling
     resultDisplayed = true;
+}
+
+const setUpKeyboard = () => {
+    //setting eventListeners to each key
+    for (let i = 0; i < keyboardInputs.length; i++) {
+        let key = keyboardInputs[i];        
+
+        if (key.innerHTML.length > 8) {
+            console.log(key.addEventListener('click', (event) => {
+                handleInputs("BACKSPACE");
+            }));
+            continue;
+        }
+
+        key.addEventListener('click', (event) => {
+            handleInputs(key.innerHTML);
+        })
+    }
 }
