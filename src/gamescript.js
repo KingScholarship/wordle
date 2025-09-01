@@ -30,7 +30,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     for (let i = 0; i < keyboardInputs.length; i++) {
         let key = keyboardInputs[i];        
 
-        if (key.innerHTML.length > 6) continue;
+        if (key.innerHTML.length > 8) {
+            console.log(key.addEventListener('click', (event) => {
+                handleInputs("BACKSPACE");
+            }));
+            continue;
+        }
 
         key.addEventListener('click', (event) => {
             handleInputs(key.innerHTML);
@@ -203,7 +208,7 @@ const restart = () => {
         letterContainer.innerHTML += '<div class="letters"></div>\n';
     }
 
-    keyboardElement.innerHTML = '<div class="keys">Q</div>\n<div class="keys">W</div>\n<div class="keys">E</div>\n<div class="keys">R</div>\n<div class="keys">T</div>\n<div class="keys">Y</div>\n<div class="keys">U</div>\n<div class="keys">I</div>\n<div class="keys">O</div>\n<div class="keys">P</div>\n<div class="keys">A</div>\n<div class="keys">S</div>\n<div class="keys">D</div>\n<div class="keys">F</div>\n<div class="keys">G</div>\n<div class="keys">H</div>\n<div class="keys">J</div>\n<div class="keys">K</div>\n<div class="keys">L</div>\n<div class="keys">Z</div>\n<div class="keys" style="grid-column: span 2;">ENTER</div>\n<div class="keys">X</div>\n<div class="keys">C</div>\n<div class="keys">V</div>\n<div class="keys">B</div>\n<div class="keys">N</div>\n<div class="keys">M</div>\n<div class="keys" style="grid-column: span 2;" onclick="handleInputs("BACKSPACE")"><i class="fa-solid fa-delete-left"></i></div>';
+    keyboardElement.innerHTML = '<div class="keys">Q</div>\n<div class="keys">W</div>\n<div class="keys">E</div>\n<div class="keys">R</div>\n<div class="keys">T</div>\n<div class="keys">Y</div>\n<div class="keys">U</div>\n<div class="keys">I</div>\n<div class="keys">O</div>\n<div class="keys">P</div>\n<div class="keys">A</div>\n<div class="keys">S</div>\n<div class="keys">D</div>\n<div class="keys">F</div>\n<div class="keys">G</div>\n<div class="keys">H</div>\n<div class="keys">J</div>\n<div class="keys">K</div>\n<div class="keys">L</div>\n<div class="keys">Z</div>\n<div class="keys" style="grid-column: span 2;">ENTER</div>\n<div class="keys">X</div>\n<div class="keys">C</div>\n<div class="keys">V</div>\n<div class="keys">B</div>\n<div class="keys">N</div>\n<div class="keys">M</div>\n<div class="keys" style="grid-column: span 2;"><i class="fa-solid fa-delete-left"></i></div>';
 
     //hide result
     displayResultElement.className = "result";
