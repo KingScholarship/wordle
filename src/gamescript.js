@@ -23,17 +23,17 @@ const keyboardElement = document.getElementsByClassName('keyboard')[0];
 const keyboardInputs = document.getElementsByClassName('keys');
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    //setup keyboard for game
+    //setup keyboard for game for mobiles
     setUpKeyboard();
 
-    //whenever the DOM loaded we call restart
+    //whenever the DOM loaded we restart everything
     restart();
 })
 
 document.addEventListener('keydown', (event)=> {
     const key = event.key.toUpperCase();
     
-    //if result is currently displaying, dont handle inputs
+    //if result is currently displaying, dont handle inputs, except ENTER and ESCAPE, to restart, and to home page
     if (resultDisplayed === true) {
         if (key == "ENTER") {
             restart();
@@ -51,6 +51,7 @@ const handleInputs = (key) => {
     //proceed to menu
     if (key == "ESCAPE") {
         window.location.href = '../index.html';
+        return;
     }
 
     //check letter row
@@ -202,8 +203,6 @@ const restart = () => {
         letterContainer.innerHTML += '<div class="letters"></div>\n';
     }
 
-    keyboardElement.innerHTML = '<div class="keys">Q</div>\n<div class="keys">W</div>\n<div class="keys">E</div>\n<div class="keys">R</div>\n<div class="keys">T</div>\n<div class="keys">Y</div>\n<div class="keys">U</div>\n<div class="keys">I</div>\n<div class="keys">O</div>\n<div class="keys">P</div>\n<div class="keys">A</div>\n<div class="keys">S</div>\n<div class="keys">D</div>\n<div class="keys">F</div>\n<div class="keys">G</div>\n<div class="keys">H</div>\n<div class="keys">J</div>\n<div class="keys">K</div>\n<div class="keys">L</div>\n<div class="keys">Z</div>\n<div class="keys" style="grid-column: span 2;">ENTER</div>\n<div class="keys">X</div>\n<div class="keys">C</div>\n<div class="keys">V</div>\n<div class="keys">B</div>\n<div class="keys">N</div>\n<div class="keys">M</div>\n<div class="keys" style="grid-column: span 2;"><i class="fa-solid fa-delete-left"></i></div>';
-
     //hide result
     displayResultElement.className = "result";
     resultContainer.style.display = "none";
@@ -237,14 +236,18 @@ const displayResult = (result) => {
 }
 
 const setUpKeyboard = () => {
+    
+    //setup keyboard elements
+    keyboardElement.innerHTML = '<div class="keys">Q</div>\n<div class="keys">W</div>\n<div class="keys">E</div>\n<div class="keys">R</div>\n<div class="keys">T</div>\n<div class="keys">Y</div>\n<div class="keys">U</div>\n<div class="keys">I</div>\n<div class="keys">O</div>\n<div class="keys">P</div>\n<div class="keys">A</div>\n<div class="keys">S</div>\n<div class="keys">D</div>\n<div class="keys">F</div>\n<div class="keys">G</div>\n<div class="keys">H</div>\n<div class="keys">J</div>\n<div class="keys">K</div>\n<div class="keys">L</div>\n<div class="keys">Z</div>\n<div class="keys" style="grid-column: span 2;">ENTER</div>\n<div class="keys">X</div>\n<div class="keys">C</div>\n<div class="keys">V</div>\n<div class="keys">B</div>\n<div class="keys">N</div>\n<div class="keys">M</div>\n<div class="keys" style="grid-column: span 2;"><i class="fa-solid fa-delete-left"></i></div>';
+
     //setting eventListeners to each key
     for (let i = 0; i < keyboardInputs.length; i++) {
-        let key = keyboardInputs[i];        
+        let key = keyboardInputs[i];
 
         if (key.innerHTML.length > 8) {
-            console.log(key.addEventListener('click', (event) => {
+            key.addEventListener('click', (event) => {
                 handleInputs("BACKSPACE");
-            }));
+            });
             continue;
         }
 
