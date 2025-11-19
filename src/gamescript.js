@@ -22,10 +22,10 @@ const resultContainer = document.getElementsByClassName('result-container')[0];
 const keyboardElement = document.getElementsByClassName('keyboard')[0];
 const keyboardInputs = document.getElementsByClassName('keys');
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    //setup keyboard for game for mobiles
-    setUpKeyboard();
+const letters = [];
+const lettersOccurrences = [];
 
+document.addEventListener('DOMContentLoaded', (event) => {
     //whenever the DOM loaded we restart everything
     restart();
 })
@@ -81,16 +81,14 @@ const handleInputs = (key) => {
     if (currentIndex < columns) currentIndex++;
 }
 
-const handleInputEnter = () => {
-    checkCorrectAnswer();
-}
-
 const handleInputBackSpace = () => {
     --currentIndex;
     letterElements[(tries * columns) + currentIndex].innerHTML = "";
 }
 
 const checkCorrectAnswer = () => {
+
+    let wordInput = "";
 
     //if the columns is not yet filled, stop
     if (currentIndex !== columns) return;
@@ -99,12 +97,14 @@ const checkCorrectAnswer = () => {
     let correct = 0;
 
     //loop through the letters in the input
-    for (let i = 0; i < columns; i++) {
+    for (let i = 0; i < columns; i++) {        
         //tries * columns + i represents the current index element;
 
         //letterElement = div ; letterInput = text
         let letterElement = letterElements[tries * columns + i];
         let letterInput = letterElement.innerHTML;
+        
+        wordInput += letterInput;
 
         //check if input equals at the correct position in the word
         if (letterInput === word[i]) {
@@ -119,6 +119,10 @@ const checkCorrectAnswer = () => {
             //check if the letter exists in the word
             if (word.includes(letterInput)) {
                 //if it exists then concatenate classname with exist indicating it exists in the word
+
+                //it should only concatenate whoever is the closest to the letter in the selected word, with expected amount of existing letters
+                let isExist = handleExistingLetter();
+
                 concatenateClassName(letterInput, "exist", letterElement);
             } else {
                 //otherwise establish it as wrong letter and does not exist in the word
@@ -149,6 +153,38 @@ const checkCorrectAnswer = () => {
     currentIndex = 0;
 }
 
+const handleExistingLetter = (letter) => {
+    
+}
+
+const checkOccurrences = (wordInput) => {
+    console.log(wordInput);
+}
+
+const setWordOccurrences = () => {
+
+    //loop through word
+    for (let i = 0; i < word.length; i++) {
+
+        //if letter is already in the list, continue
+        if (letters.includes(word[i])) continue;
+
+        //otherwise push to list, as well as its occurrences
+        letters.push(word[i]);
+        lettersOccurrences.push(countOccurrences(word[i]));
+
+    }
+
+}
+
+const countOccurrences = (letter) => {
+    let count = 0;
+    for (let i = 0; i < word.length; i++) {
+        if (letter == word[i]) ++count;
+    }
+    return count;
+}
+
 const concatenateClassName = (letterInput, status, letterElement) => {
     for (let j = 0; j < keyboardInputs.length; j++) {
         if (keyboardInputs[j].innerHTML == letterInput) {
@@ -171,7 +207,12 @@ const randomWordChoose = () => {
 
     if (words[randomIndex].length != numberOfLetters) return randomWordChoose();
 
-    return word = (words[randomIndex]).toUpperCase();
+    word = (words[randomIndex]).toUpperCase();
+
+    //set occurrences for variable letters
+    setWordOccurrences();
+
+    checkOccurrences(word);
 }
 
 //not my function
@@ -182,6 +223,9 @@ const getRandomInt = (min, max) => {
 }
 
 const restart = () => {
+    //setup keyboard for game for mobiles
+    setUpKeyboard();
+
     //choose random word and then print to console the word
     randomWordChoose();
     console.log("Word Chosen: " + word);
